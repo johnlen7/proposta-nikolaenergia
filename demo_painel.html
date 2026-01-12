@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla - Painel Administrativo | Nikola Energia</title>
+    <title>Nikola - Sistema Integrado</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
@@ -19,6 +19,8 @@
             background: linear-gradient(135deg, #0a0f1a 0%, #111827 50%, #0f172a 100%);
             color: #f1f5f9;
             min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         .bg-pattern {
@@ -29,8 +31,8 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
+            background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.06) 0%, transparent 40%);
         }
 
         .app {
@@ -53,26 +55,39 @@
         }
 
         .sidebar-header {
-            padding: 24px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 1px 10px;
+            background: #FFFFFF;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            min-height: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
-            border-radius: 14px;
+            width: 180px;
+            height: auto;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
+            overflow: hidden;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
         }
 
         .logo-title {
@@ -93,17 +108,64 @@
         }
 
         .nav-section {
-            margin-bottom: 24px;
+            margin-bottom: 8px;
         }
 
-        .nav-section-title {
-            font-size: 0.7em;
+        .nav-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1.2px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .nav-section-header:hover {
+            background: rgba(124, 58, 237, 0.08);
+            color: #f1f5f9;
+        }
+
+        .nav-section-header .nav-section-title {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: inherit;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-section-arrow {
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
             color: #64748b;
-            padding: 0 12px;
-            margin-bottom: 10px;
-            font-weight: 600;
+        }
+
+        .nav-section.expanded .nav-section-arrow {
+            transform: rotate(90deg);
+        }
+
+        .nav-section.expanded .nav-section-header {
+            color: #7C3AED;
+        }
+
+        .nav-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 4px;
+        }
+
+        .nav-section.expanded .nav-section-content {
+            max-height: 1000px;
         }
 
         .nav-item {
@@ -122,14 +184,14 @@
         }
 
         .nav-item:hover {
-            background: rgba(56, 189, 248, 0.08);
+            background: rgba(124, 58, 237, 0.08);
             color: #f1f5f9;
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(6, 182, 212, 0.1));
-            color: #38bdf8;
-            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(30, 58, 138, 0.1));
+            color: #7C3AED;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.15);
         }
 
         .nav-icon {
@@ -198,6 +260,8 @@
             margin-left: 280px;
             padding: 24px 32px;
             min-height: 100vh;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .main-header {
@@ -285,8 +349,8 @@
 
         /* Demo Banner */
         .demo-banner {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(6, 182, 212, 0.08));
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(30, 58, 138, 0.08));
+            border: 1px solid rgba(124, 58, 237, 0.25);
             border-radius: 16px;
             padding: 20px 24px;
             display: flex;
@@ -298,7 +362,7 @@
         .demo-banner-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #38bdf8, #06b6d4);
+            background: linear-gradient(135deg, #7C3AED, #1E3A8A);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -320,10 +384,10 @@
 
         .demo-banner-btn {
             padding: 12px 24px;
-            background: linear-gradient(135deg, #38bdf8, #06b6d4);
+            background: linear-gradient(135deg, #7C3AED, #1E3A8A);
             border: none;
             border-radius: 12px;
-            color: #0f172a;
+            color: #FFFFFF;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -332,7 +396,7 @@
 
         .demo-banner-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
         }
 
         /* KPI Cards */
@@ -368,7 +432,7 @@
         }
 
         .kpi-card.blue::before {
-            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            background: linear-gradient(90deg, #7C3AED, #1E3A8A);
         }
 
         .kpi-card.green::before {
@@ -401,7 +465,7 @@
         }
 
         .kpi-card.blue .kpi-icon {
-            background: rgba(56, 189, 248, 0.15);
+            background: rgba(124, 58, 237, 0.15);
         }
 
         .kpi-card.green .kpi-icon {
@@ -486,8 +550,8 @@
             padding: 8px 16px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
+            background: rgba(124, 58, 237, 0.1);
+            color: #7C3AED;
             font-size: 0.85em;
             font-weight: 600;
             cursor: pointer;
@@ -495,7 +559,7 @@
         }
 
         .panel-btn:hover {
-            background: rgba(56, 189, 248, 0.2);
+            background: rgba(124, 58, 237, 0.2);
         }
 
         .panel-body {
@@ -519,7 +583,7 @@
         }
 
         .project-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
+            border-color: rgba(124, 58, 237, 0.3);
             transform: translateY(-2px);
         }
 
@@ -547,7 +611,7 @@
         }
 
         .project-card:nth-child(1) .project-avatar {
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            background: linear-gradient(135deg, #7C3AED, #1E3A8A);
         }
 
         .project-card:nth-child(2) .project-avatar {
@@ -577,8 +641,8 @@
         }
 
         .status-progress {
-            background: rgba(56, 189, 248, 0.15);
-            color: #38bdf8;
+            background: rgba(124, 58, 237, 0.15);
+            color: #7C3AED;
         }
 
         .status-homolog {
@@ -608,7 +672,7 @@
         }
 
         .progress-value {
-            color: #38bdf8;
+            color: #7C3AED;
             font-weight: 700;
             font-size: 0.85em;
         }
@@ -627,7 +691,7 @@
         }
 
         .project-card:nth-child(1) .progress-fill {
-            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            background: linear-gradient(90deg, #7C3AED, #1E3A8A);
         }
 
         .project-card:nth-child(2) .progress-fill {
@@ -640,8 +704,15 @@
 
         .stages-mini {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .stage-item-mini {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .stage-dot {
@@ -649,6 +720,7 @@
             height: 10px;
             border-radius: 50%;
             background: rgba(100, 116, 139, 0.4);
+            flex-shrink: 0;
         }
 
         .stage-dot.done {
@@ -657,9 +729,24 @@
         }
 
         .stage-dot.current {
-            background: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            background: #7C3AED;
+            box-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
             animation: pulse 2s infinite;
+        }
+
+        .stage-label {
+            font-size: 0.75em;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .stage-item-mini .stage-dot.done + .stage-label {
+            color: #94a3b8;
+        }
+
+        .stage-item-mini .stage-dot.current + .stage-label {
+            color: #7C3AED;
+            font-weight: 600;
         }
 
         /* Activity Feed */
@@ -689,7 +776,7 @@
         }
 
         .activity-icon.doc {
-            background: rgba(56, 189, 248, 0.15);
+            background: rgba(124, 58, 237, 0.15);
         }
 
         .activity-icon.success {
@@ -712,7 +799,7 @@
         }
 
         .activity-text strong {
-            color: #38bdf8;
+            color: #7C3AED;
         }
 
         .activity-time {
@@ -801,45 +888,102 @@
             font-size: 0.85em;
         }
 
-        /* Alerts Bar - Top Horizontal */
+        /* Alerts Bar - Manual Navigation */
         .alerts-bar {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.05));
             border: 1px solid rgba(245, 158, 11, 0.2);
             border-radius: 16px;
-            padding: 12px 16px;
+            padding: 12px 50px 12px 16px;
             margin-bottom: 20px;
             min-height: 60px;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .alerts-bar-inner {
+            flex: 1;
+            min-width: 0;
+            position: relative;
             display: flex;
+            align-items: center;
+            justify-content: flex-start;
             gap: 12px;
             overflow-x: auto;
-            padding-bottom: 4px;
-            width: 100%;
-            flex-wrap: wrap;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .alerts-bar-inner::-webkit-scrollbar {
+            display: none;
         }
 
         .alert-chip {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
+            padding: 8px 16px;
             background: rgba(15, 23, 42, 0.8);
             border: 2px solid rgba(245, 158, 11, 0.5);
             border-radius: 10px;
-            flex-shrink: 1;
-            min-width: 0;
+            width: auto;
+            flex-shrink: 0;
             animation: chipPulse 2s ease-in-out infinite;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .alert-chip:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
             border-color: rgba(245, 158, 11, 0.8);
+        }
+
+        .alerts-nav-buttons {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 10;
+        }
+
+        .alert-nav-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(245, 158, 11, 0.9);
+            border: none;
+            color: #1e293b;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .alert-nav-btn:hover {
+            background: #f59e0b;
+            transform: scale(1.1);
+        }
+
+        .alert-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .alert-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
         }
 
         @keyframes chipPulse {
@@ -877,9 +1021,6 @@
         .alert-chip-text {
             color: #94a3b8;
             font-size: 0.75em;
-            max-width: 180px;
-            overflow: hidden;
-            text-overflow: ellipsis;
             white-space: nowrap;
         }
 
@@ -902,7 +1043,7 @@
         .quick-stat-value {
             font-size: 1.6em;
             font-weight: 800;
-            color: #38bdf8;
+            color: #7C3AED;
             margin-bottom: 4px;
         }
 
@@ -938,7 +1079,7 @@
         }
 
         .doc-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
+            border-color: rgba(124, 58, 237, 0.3);
             transform: translateY(-4px);
         }
 
@@ -1008,7 +1149,7 @@
         }
 
         .group-avatar.client {
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            background: linear-gradient(135deg, #7C3AED, #1E3A8A);
         }
 
         .group-avatar.homolog {
@@ -1041,7 +1182,7 @@
         }
 
         .group-stat strong {
-            color: #38bdf8;
+            color: #7C3AED;
         }
 
         /* Analytics View */
@@ -1121,7 +1262,7 @@
             justify-content: space-between;
             padding: 20px 24px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(6, 182, 212, 0.05));
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(30, 58, 138, 0.05));
         }
 
         .modal-header h3 {
@@ -1198,8 +1339,8 @@
         }
 
         .stage-item.current {
-            border-color: rgba(56, 189, 248, 0.4);
-            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(124, 58, 237, 0.4);
+            background: rgba(124, 58, 237, 0.1);
         }
 
         .stage-number {
@@ -1222,8 +1363,8 @@
         }
 
         .stage-item.current .stage-number {
-            background: #38bdf8;
-            color: #0f172a;
+            background: #7C3AED;
+            color: #FFFFFF;
             animation: pulse 2s infinite;
         }
 
@@ -1238,7 +1379,7 @@
         }
 
         .stage-item.current .stage-name {
-            color: #38bdf8;
+            color: #7C3AED;
             font-weight: 600;
         }
 
@@ -1277,7 +1418,7 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3);
+            background: rgba(124, 58, 237, 0.3);
             border-radius: 4px;
         }
     </style>
@@ -1290,56 +1431,87 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <div class="logo-icon">⚡</div>
-                    <div>
-                        <div class="logo-title">TESLA</div>
-                        <div class="logo-subtitle">Nikola Energia</div>
-                    </div>
+                    <div class="logo-icon"><img src="logo-nikola.png" alt="Nikola Energia"></div>
                 </div>
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-section">
-                    <div class="nav-section-title">Principal</div>
-                    <div class="nav-item active" onclick="showView('dashboard')">
-                        <span class="nav-icon">📊</span><span>Dashboard</span>
+                    <div class="nav-section-header" onclick="toggleNavSection(this.parentElement)">
+                        <span class="nav-section-title">COMERCIAL > NIKO</span>
+                        <span class="nav-section-arrow">▶</span>
                     </div>
-                    <div class="nav-item" onclick="showView('projetos')">
-                        <span class="nav-icon">📁</span><span>Projetos</span>
-                        <span class="nav-badge red">3</span>
-                    </div>
-                    <div class="nav-item" onclick="showView('clientes')">
-                        <span class="nav-icon">👥</span><span>Clientes</span>
-                    </div>
-                </div>
-                <div class="nav-section">
-                    <div class="nav-section-title">Automação</div>
-                    <div class="nav-item" onclick="showView('tesla-ia')">
-                        <span class="nav-icon">🤖</span><span>Tesla IA</span>
-                        <span class="nav-badge green">Online</span>
-                    </div>
-                    <div class="nav-item" onclick="showView('whatsapp')">
-                        <span class="nav-icon">💬</span><span>WhatsApp</span>
-                    </div>
-                    <div class="nav-item" onclick="showView('documentos')">
-                        <span class="nav-icon">📄</span><span>Documentos</span>
+                    <div class="nav-section-content">
+                        <div class="nav-item" onclick="showView('niko-dashboard', this)">
+                            <span class="nav-icon">📊</span><span>Dashboard Comercial</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('leads', this)">
+                            <span class="nav-icon">👥</span><span>Leads</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('niko-bot', this)">
+                            <span class="nav-icon">🤖</span><span>NIKO Bot</span>
+                            <span class="nav-badge green">Online</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('vendas', this)">
+                            <span class="nav-icon">💼</span><span>Vendas</span>
+                        </div>
                     </div>
                 </div>
                 <div class="nav-section">
-                    <div class="nav-section-title">Relatórios</div>
-                    <div class="nav-item" onclick="showView('analytics')">
-                        <span class="nav-icon">📈</span><span>Analytics</span>
+                    <div class="nav-section-header" onclick="toggleNavSection(this.parentElement)">
+                        <span class="nav-section-title">PROJETOS > Tesla</span>
+                        <span class="nav-section-arrow">▶</span>
                     </div>
-                    <div class="nav-item" onclick="showView('financeiro')">
-                        <span class="nav-icon">💰</span><span>Financeiro</span>
+                    <div class="nav-section-content">
+                        <div class="nav-item" onclick="showView('projetos-dashboard', this)">
+                            <span class="nav-icon">📊</span><span>Dashboard Projetos</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('projetos', this)">
+                            <span class="nav-icon">📁</span><span>Projetos</span>
+                            <span class="nav-badge red">3</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('clientes', this)">
+                            <span class="nav-icon">👥</span><span>Clientes</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('tesla-ia', this)">
+                            <span class="nav-icon">🤖</span><span>Tesla IA</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('whatsapp', this)">
+                            <span class="nav-icon">💬</span><span>WhatsApp</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('documentos', this)">
+                            <span class="nav-icon">📄</span><span>Documentos</span>
+                        </div>
                     </div>
                 </div>
                 <div class="nav-section">
-                    <div class="nav-section-title">Sistema</div>
-                    <div class="nav-item" onclick="showView('configuracoes')">
-                        <span class="nav-icon">⚙️</span><span>Configurações</span>
+                    <div class="nav-section-header" onclick="toggleNavSection(this.parentElement)">
+                        <span class="nav-section-title">FINANCEIRO</span>
+                        <span class="nav-section-arrow">▶</span>
                     </div>
-                    <div class="nav-item" onclick="showView('ajuda')">
-                        <span class="nav-icon">❓</span><span>Ajuda</span>
+                    <div class="nav-section-content">
+                        <div class="nav-item" onclick="showView('financeiro-dashboard', this)">
+                            <span class="nav-icon">📊</span><span>Dashboard Financeiro</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('financeiro', this)">
+                            <span class="nav-icon">💰</span><span>Financeiro</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('analytics', this)">
+                            <span class="nav-icon">📈</span><span>Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-header" onclick="toggleNavSection(this.parentElement)">
+                        <span class="nav-section-title">Sistema</span>
+                        <span class="nav-section-arrow">▶</span>
+                    </div>
+                    <div class="nav-section-content">
+                        <div class="nav-item" onclick="showView('configuracoes', this)">
+                            <span class="nav-icon">⚙️</span><span>Configurações</span>
+                        </div>
+                        <div class="nav-item" onclick="showView('ajuda', this)">
+                            <span class="nav-icon">❓</span><span>Ajuda</span>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -1358,8 +1530,8 @@
         <main class="main-content">
             <header class="main-header">
                 <div class="page-title">
-                    <h1 id="pageTitle">Dashboard Tesla</h1>
-                    <p id="pageSubtitle">Monitoramento em tempo real dos projetos de energia solar</p>
+                    <h1 id="pageTitle">Bem-vindo ao Nikola</h1>
+                    <p id="pageSubtitle">Sistema integrado de gestão para energia solar</p>
                 </div>
                 <div class="header-actions">
                     <div class="search-box">
@@ -1373,26 +1545,149 @@
                 </div>
             </header>
 
-            <div class="demo-banner">
-                <div class="demo-banner-icon">🧪</div>
-                <div style="flex:1">
-                    <div class="demo-banner-title">Modo Demonstração Ativo</div>
-                    <div class="demo-banner-text">Sistema Tesla processando documentos 24/7 com 97.8% de precisão. Dados
-                        simulados.</div>
-                </div>
-                <button class="demo-banner-btn" onclick="window.location.href='index.html'">←
-                    Voltar</button>
-            </div>
-
             <!-- Top Alerts Bar -->
             <div class="alerts-bar" id="alertsBarTop">
                 <div class="alerts-bar-inner" id="alertsBarInner">
                     <!-- Alerts will be added here dynamically -->
                 </div>
+                <div class="alerts-nav-buttons">
+                    <button class="alert-nav-btn" id="alertNavPrev" onclick="scrollAlerts('prev')" title="Anterior">▲</button>
+                    <button class="alert-nav-btn" id="alertNavNext" onclick="scrollAlerts('next')" title="Próximo">▼</button>
+                </div>
             </div>
 
-            <!-- Dashboard View -->
-            <div class="view-section active" id="view-dashboard">
+            <!-- Home/Welcome View -->
+            <div class="view-section active" id="view-home">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <!-- Hero Section -->
+                    <div style="text-align: center; margin-bottom: 48px; padding: 40px 0;">
+                        <div style="display: inline-block; margin-bottom: 24px;">
+                            <img src="logo-nikola.png" alt="Nikola Energia" style="height: 120px; width: auto; filter: brightness(0) invert(1) drop-shadow(0 8px 24px rgba(124, 58, 237, 0.3));">
+                        </div>
+                        <h1 style="font-size: 3em; font-weight: 800; color: #f1f5f9; margin-bottom: 16px; background: linear-gradient(135deg, #7C3AED, #1E3A8A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Bem-vindo ao Sistema Nikola
+                        </h1>
+                        <p style="font-size: 1.2em; color: #94a3b8; max-width: 600px; margin: 0 auto;">
+                            Sistema integrado de gestão para energia solar. Gerencie vendas, projetos e finanças em um só lugar.
+                        </p>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="kpi-grid" style="margin-bottom: 48px;">
+                        <div class="kpi-card blue" onclick="navigateToView('niko-dashboard')" style="cursor: pointer;">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">💼</div>
+                                <div class="kpi-trend up">↑ 15%</div>
+                            </div>
+                            <div class="kpi-value">24</div>
+                            <div class="kpi-label">Leads Ativos</div>
+                        </div>
+                        <div class="kpi-card green" onclick="navigateToView('projetos-dashboard')" style="cursor: pointer;">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">📁</div>
+                                <div class="kpi-trend up">↑ 12%</div>
+                            </div>
+                            <div class="kpi-value">10</div>
+                            <div class="kpi-label">Projetos Ativos</div>
+                        </div>
+                        <div class="kpi-card purple" onclick="navigateToView('financeiro-dashboard')" style="cursor: pointer;">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">💰</div>
+                                <div class="kpi-trend up">↑ 18%</div>
+                            </div>
+                            <div class="kpi-value">R$ 485K</div>
+                            <div class="kpi-label">Receita Total</div>
+                        </div>
+                        <div class="kpi-card amber">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">🤖</div>
+                                <div class="kpi-trend up">Online</div>
+                            </div>
+                            <div class="kpi-value">97.8%</div>
+                            <div class="kpi-label">Precisão IA</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access Cards -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px;">
+                        <div class="panel" onclick="navigateToView('niko-dashboard')" style="cursor: pointer; transition: all 0.3s ease;">
+                            <div class="panel-header">
+                                <div class="panel-title">💼 COMERCIAL</div>
+                            </div>
+                            <div class="panel-body">
+                                <p style="color:#94a3b8;margin-bottom:16px;">Gerencie vendas, leads e qualificações com o bot NIKO.</p>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Dashboard</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Leads</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Vendas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel" onclick="navigateToView('projetos-dashboard')" style="cursor: pointer; transition: all 0.3s ease;">
+                            <div class="panel-header">
+                                <div class="panel-title">📁 PROJETOS</div>
+                            </div>
+                            <div class="panel-body">
+                                <p style="color:#94a3b8;margin-bottom:16px;">Acompanhe projetos de energia solar com o Tesla IA.</p>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Dashboard</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Projetos</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Tesla IA</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel" onclick="navigateToView('financeiro-dashboard')" style="cursor: pointer; transition: all 0.3s ease;">
+                            <div class="panel-header">
+                                <div class="panel-title">💰 FINANCEIRO</div>
+                            </div>
+                            <div class="panel-body">
+                                <p style="color:#94a3b8;margin-bottom:16px;">Controle financeiro completo e analytics.</p>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Dashboard</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Financeiro</span>
+                                    <span style="padding: 6px 12px; background: rgba(124, 58, 237, 0.1); border-radius: 8px; font-size: 0.85em; color: #7C3AED;">Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Status -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">⚡ Status do Sistema</div>
+                        </div>
+                        <div class="panel-body">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                                <div style="text-align: center; padding: 20px; background: rgba(16, 185, 129, 0.08); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                                    <div style="font-size: 2em; margin-bottom: 8px;">✅</div>
+                                    <div style="font-weight: 700; color: #10b981; margin-bottom: 4px;">Tesla IA</div>
+                                    <div style="font-size: 0.85em; color: #94a3b8;">Online</div>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: rgba(16, 185, 129, 0.08); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                                    <div style="font-size: 2em; margin-bottom: 8px;">✅</div>
+                                    <div style="font-weight: 700; color: #10b981; margin-bottom: 4px;">NIKO Bot</div>
+                                    <div style="font-size: 0.85em; color: #94a3b8;">Online</div>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: rgba(124, 58, 237, 0.08); border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.2);">
+                                    <div style="font-size: 2em; margin-bottom: 8px;">📊</div>
+                                    <div style="font-weight: 700; color: #7C3AED; margin-bottom: 4px;">97.8%</div>
+                                    <div style="font-size: 0.85em; color: #94a3b8;">Precisão</div>
+                                </div>
+                                <div style="text-align: center; padding: 20px; background: rgba(124, 58, 237, 0.08); border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.2);">
+                                    <div style="font-size: 2em; margin-bottom: 8px;">⚡</div>
+                                    <div style="font-weight: 700; color: #7C3AED; margin-bottom: 4px;">2.3s</div>
+                                    <div style="font-size: 0.85em; color: #94a3b8;">Tempo Resposta</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Projetos View -->
+            <div class="view-section" id="view-projetos-dashboard">
                 <div class="kpi-grid">
                     <div class="kpi-card blue">
                         <div class="kpi-header">
@@ -1718,6 +2013,115 @@
                 </div>
             </div>
 
+            <!-- Comercial Views -->
+            <div class="view-section" id="view-niko-dashboard">
+                <div class="kpi-grid">
+                    <div class="kpi-card blue">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">📊</div>
+                            <div class="kpi-trend up">↑ 15%</div>
+                        </div>
+                        <div class="kpi-value">24</div>
+                        <div class="kpi-label">Leads Ativos</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">✅</div>
+                            <div class="kpi-trend up">↑ 8%</div>
+                        </div>
+                        <div class="kpi-value">12</div>
+                        <div class="kpi-label">Conversões este Mês</div>
+                    </div>
+                    <div class="kpi-card amber">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">💼</div>
+                            <div class="kpi-trend up">↑ 22%</div>
+                        </div>
+                        <div class="kpi-value">8</div>
+                        <div class="kpi-label">Propostas Pendentes</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">📈</div>
+                            <div class="kpi-trend up">↑ 18%</div>
+                        </div>
+                        <div class="kpi-value">48%</div>
+                        <div class="kpi-label">Taxa de Conversão</div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">📊 Dashboard Comercial - NIKO</div>
+                    </div>
+                    <div class="panel-body">
+                        <p style="color:#94a3b8;">Visão geral do funil de vendas, leads qualificados e performance do bot NIKO.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-section" id="view-leads">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">👥 Leads</div>
+                        <button class="panel-btn">+ Novo Lead</button>
+                    </div>
+                    <div class="panel-body">
+                        <p style="color:#94a3b8;">Gerenciamento e qualificação de leads. Pipeline de vendas e histórico de contatos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-section" id="view-niko-bot">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">🤖 NIKO Bot</div>
+                        <div class="live-indicator"><span class="live-dot"></span> Online</div>
+                    </div>
+                    <div class="panel-body">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+                            <div class="quick-stat">
+                                <div class="quick-stat-value">156</div>
+                                <div class="quick-stat-label">Leads Qualificados</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-value">24/7</div>
+                                <div class="quick-stat-label">Disponibilidade</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-value">2.1s</div>
+                                <div class="quick-stat-label">Tempo Resposta</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-value">GPT-4</div>
+                                <div class="quick-stat-label">Motor IA</div>
+                            </div>
+                        </div>
+                        <div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:14px;padding:20px;">
+                            <h4 style="color:#7C3AED;margin-bottom:12px;">✅ NIKO Bot Ativo</h4>
+                            <p style="color:#94a3b8;font-size:0.9em;line-height:1.6;">
+                                • Qualificação automática de leads<br>
+                                • Respostas inteligentes via WhatsApp<br>
+                                • Agendamento de reuniões<br>
+                                • Análise de perfil do cliente<br>
+                                • Integração com CRM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-section" id="view-vendas">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">💼 Vendas</div>
+                        <button class="panel-btn">Nova Proposta</button>
+                    </div>
+                    <div class="panel-body">
+                        <p style="color:#94a3b8;">Propostas comerciais, funil de vendas, conversões e histórico de negociações.</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Other Views (placeholder) -->
             <div class="view-section" id="view-clientes">
                 <div class="panel">
@@ -1729,13 +2133,100 @@
                     </div>
                 </div>
             </div>
+            <!-- Dashboard Financeiro View -->
+            <div class="view-section" id="view-financeiro-dashboard">
+                <div class="kpi-grid">
+                    <div class="kpi-card green">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">💰</div>
+                            <div class="kpi-trend up">↑ 12%</div>
+                        </div>
+                        <div class="kpi-value">R$ 485K</div>
+                        <div class="kpi-label">Receita Total</div>
+                    </div>
+                    <div class="kpi-card blue">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">📈</div>
+                            <div class="kpi-trend up">↑ 8%</div>
+                        </div>
+                        <div class="kpi-value">R$ 125K</div>
+                        <div class="kpi-label">Receita este Mês</div>
+                    </div>
+                    <div class="kpi-card amber">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">⏳</div>
+                            <div class="kpi-trend up">↓ 5%</div>
+                        </div>
+                        <div class="kpi-value">R$ 45K</div>
+                        <div class="kpi-label">A Receber</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">💵</div>
+                            <div class="kpi-trend up">↑ 15%</div>
+                        </div>
+                        <div class="kpi-value">R$ 28K</div>
+                        <div class="kpi-label">Margem Média</div>
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">📊 Resumo Financeiro</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="analytics-grid">
+                                <div class="analytics-card">
+                                    <div class="analytics-title">💰 Receitas</div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Total Processado</span>
+                                        <span class="analytics-value">R$ 485.250</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Recebido</span>
+                                        <span class="analytics-value highlight">R$ 440.250</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">A Receber</span>
+                                        <span class="analytics-value">R$ 45.000</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Média por Projeto</span>
+                                        <span class="analytics-value">R$ 40.438</span>
+                                    </div>
+                                </div>
+                                <div class="analytics-card">
+                                    <div class="analytics-title">📈 Métricas</div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Projetos Ativos</span>
+                                        <span class="analytics-value">12</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Taxa de Conversão</span>
+                                        <span class="analytics-value highlight">48%</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">Ticket Médio</span>
+                                        <span class="analytics-value">R$ 40.438</span>
+                                    </div>
+                                    <div class="analytics-row">
+                                        <span class="analytics-label">ROI</span>
+                                        <span class="analytics-value highlight">34 dias</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="view-section" id="view-financeiro">
                 <div class="panel">
                     <div class="panel-header">
                         <div class="panel-title">💰 Financeiro</div>
                     </div>
                     <div class="panel-body">
-                        <p style="color:#94a3b8;">Módulo financeiro em desenvolvimento.</p>
+                        <p style="color:#94a3b8;">Detalhes financeiros, receitas, despesas e relatórios contábeis.</p>
                     </div>
                 </div>
             </div>
@@ -1771,7 +2262,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-info-grid" id="modalInfoGrid"></div>
-                <h4 style="color:#38bdf8;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+                <h4 style="color:#7C3AED;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
                     📋 Etapas do Projeto
                 </h4>
                 <div class="stages-list" id="modalStagesList"></div>
@@ -1812,27 +2303,52 @@
         ];
 
         const viewTitles = {
-            'dashboard': ['Dashboard Tesla', 'Monitoramento em tempo real dos projetos de energia solar'],
+            'home': ['Bem-vindo ao Nikola', 'Sistema integrado de gestão para energia solar'],
+            'niko-dashboard': ['Dashboard Comercial', 'Visão geral de vendas, leads e conversões'],
+            'leads': ['Leads', 'Gerenciamento e qualificação de leads'],
+            'niko-bot': ['NIKO Bot', 'Configurações e status do bot de vendas'],
+            'vendas': ['Vendas', 'Propostas, conversões e funil de vendas'],
+            'projetos-dashboard': ['Dashboard Projetos', 'Monitoramento em tempo real dos projetos de energia solar'],
             'projetos': ['Projetos', 'Gerencie todos os projetos de energia solar'],
             'clientes': ['Clientes', 'Base de clientes cadastrados'],
             'tesla-ia': ['Tesla IA', 'Inteligência Artificial processando documentos 24/7'],
             'whatsapp': ['WhatsApp', 'Grupos monitorados pelo Tesla'],
             'documentos': ['Documentos', 'Arquivos processados automaticamente'],
-            'analytics': ['Analytics', 'Relatórios e métricas do sistema'],
-            'financeiro': ['Financeiro', 'Gestão financeira dos projetos'],
+            'financeiro-dashboard': ['Dashboard Financeiro', 'Visão geral financeira e métricas'],
+            'financeiro': ['Financeiro', 'Detalhes financeiros, receitas e despesas'],
+            'analytics': ['Analytics', 'Relatórios e métricas financeiras'],
             'configuracoes': ['Configurações', 'Configurações do sistema'],
             'ajuda': ['Ajuda', 'Central de suporte']
         };
 
-        function showView(viewId) {
+        function toggleNavSection(sectionElement) {
+            sectionElement.classList.toggle('expanded');
+        }
+
+        function navigateToView(viewId) {
+            const navItem = document.querySelector(`[onclick*="showView('${viewId}'"]`) || 
+                          document.querySelector(`[onclick*='showView("${viewId}"']`);
+            if (navItem) {
+                showView(viewId, navItem);
+            } else {
+                showView(viewId);
+            }
+        }
+
+        function showView(viewId, element) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('view-' + viewId)?.classList.add('active');
-            event.currentTarget.classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            } else if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
             const titles = viewTitles[viewId] || ['Dashboard', ''];
             document.getElementById('pageTitle').textContent = titles[0];
             document.getElementById('pageSubtitle').textContent = titles[1];
             if (viewId === 'projetos') renderAllProjects();
+            if (viewId === 'projetos-dashboard') renderProjects();
         }
 
         function renderProjects() {
@@ -1854,7 +2370,7 @@
                             <div class="progress-header"><span class="progress-label">Progresso</span><span class="progress-value" id="pv-${p.id}">${progress}%</span></div>
                             <div class="progress-bar"><div class="progress-fill" id="pf-${p.id}" style="width:${progress}%"></div></div>
                         </div>
-                        <div class="stages-mini" id="stages-${p.id}">${stages.map((_, i) => `<div class="stage-dot ${i < p.done ? 'done' : i === p.done ? 'current' : ''}"></div>`).join('')}</div>
+                        <div class="stages-mini" id="stages-${p.id}">${stages.map((stage, i) => `<div class="stage-item-mini"><div class="stage-dot ${i < p.done ? 'done' : i === p.done ? 'current' : ''}"></div><span class="stage-label">${stage}</span></div>`).join('')}</div>
                     </div>`;
             });
         }
@@ -1879,7 +2395,7 @@
                             <div class="progress-header"><span class="progress-label">Progresso</span><span class="progress-value">${progress}%</span></div>
                             <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
                         </div>
-                        <div class="stages-mini">${stages.map((_, i) => `<div class="stage-dot ${i < p.done ? 'done' : i === p.done ? 'current' : ''}"></div>`).join('')}</div>
+                        <div class="stages-mini">${stages.map((stage, i) => `<div class="stage-item-mini"><div class="stage-dot ${i < p.done ? 'done' : i === p.done ? 'current' : ''}"></div><span class="stage-label">${stage}</span></div>`).join('')}</div>
                     </div>`;
             });
         }
@@ -1895,19 +2411,84 @@
             while (container.children.length > 8) container.removeChild(container.lastChild);
         }
 
+        let alertsArray = [];
+
         function addAlert(title, text) {
-            // Add to top alerts bar (horizontal only)
+            // Add to alerts array
+            alertsArray.unshift({ title, text });
+            // Keep only last 10 alerts
+            if (alertsArray.length > 10) {
+                alertsArray = alertsArray.slice(0, 10);
+            }
+            
+            // Update display
+            updateAlertsDisplay();
+        }
+
+        function updateAlertsDisplay() {
+            const topBar = document.getElementById('alertsBarInner');
+            if (!topBar || alertsArray.length === 0) return;
+            
+            // Clear existing alerts
+            topBar.innerHTML = '';
+            
+            // Create all alert chips (all visible, scrollable)
+            alertsArray.forEach((alert) => {
+                const chip = document.createElement('div');
+                chip.className = 'alert-chip';
+                
+                chip.innerHTML = `
+                    <div class="alert-chip-icon">🔔</div>
+                    <div class="alert-chip-content">
+                        <span class="alert-chip-title">${alert.title}</span>
+                        <span class="alert-chip-text">${alert.text}</span>
+                    </div>
+                `;
+                
+                topBar.appendChild(chip);
+            });
+            
+            updateAlertsNavButtons();
+        }
+
+        function scrollAlerts(direction) {
+            const topBar = document.getElementById('alertsBarInner');
+            if (!topBar) return;
+            
+            const scrollAmount = 400; // Scroll amount in pixels
+            const currentScroll = topBar.scrollLeft;
+            const newScroll = direction === 'next' 
+                ? currentScroll + scrollAmount 
+                : currentScroll - scrollAmount;
+            
+            topBar.scrollTo({
+                left: newScroll,
+                behavior: 'smooth'
+            });
+            
+            // Update button states after scroll
+            setTimeout(updateAlertsNavButtons, 300);
+        }
+
+        function updateAlertsNavButtons() {
+            const topBar = document.getElementById('alertsBarInner');
+            const prevBtn = document.getElementById('alertNavPrev');
+            const nextBtn = document.getElementById('alertNavNext');
+            
+            if (!topBar || !prevBtn || !nextBtn) return;
+            
+            const maxScroll = topBar.scrollWidth - topBar.clientWidth;
+            const currentScroll = topBar.scrollLeft;
+            
+            prevBtn.disabled = currentScroll <= 0;
+            nextBtn.disabled = currentScroll >= maxScroll - 1;
+        }
+
+        function initAlertsScroll() {
             const topBar = document.getElementById('alertsBarInner');
             if (topBar) {
-                topBar.insertAdjacentHTML('afterbegin', `
-                    <div class="alert-chip">
-                        <div class="alert-chip-icon">🔔</div>
-                        <div class="alert-chip-content">
-                            <span class="alert-chip-title">${title}</span>
-                            <span class="alert-chip-text">${text}</span>
-                        </div>
-                    </div>`);
-                while (topBar.children.length > 4) topBar.removeChild(topBar.lastChild);
+                topBar.addEventListener('scroll', updateAlertsNavButtons);
+                updateAlertsNavButtons();
             }
         }
 
@@ -1925,7 +2506,7 @@
             if (pv) pv.textContent = `${progress}%`;
             if (pf) pf.style.width = `${progress}%`;
             const stagesEl = document.getElementById(`stages-${projectId}`);
-            if (stagesEl) stagesEl.innerHTML = stages.map((_, i) => `<div class="stage-dot ${i < proj.done ? 'done' : i === proj.done ? 'current' : ''}"></div>`).join('');
+            if (stagesEl) stagesEl.innerHTML = stages.map((stage, i) => `<div class="stage-item-mini"><div class="stage-dot ${i < proj.done ? 'done' : i === proj.done ? 'current' : ''}"></div><span class="stage-label">${stage}</span></div>`).join('');
         }
 
         let simStep = 0, simTimer = null;
@@ -1935,7 +2516,8 @@
                 if (simStep >= events.length) { addActivity('📊 <strong>Demo finalizada</strong>. Sistema roda 24/7 na operação real.', 'info'); clearInterval(simTimer); return; }
                 const ev = events[simStep++];
                 if (ev.type === 'log') addActivity(ev.text, ev.icon || 'doc');
-                if (ev.type === 'alert') addAlert(ev.title, ev.text);
+                // Removed automatic alert addition - alerts are static now
+                // if (ev.type === 'alert') addAlert(ev.title, ev.text);
                 if (ev.type === 'update') { updateProject(ev.projectId, ev.done, ev.status); addActivity(ev.log, ev.icon || 'success'); }
             }, 2500);
         }
@@ -1973,7 +2555,7 @@
                         <div class="stage-number">${isDone ? '✓' : i + 1}</div>
                         <div class="stage-name">${stage}</div>
                         ${isDone ? `<span class="stage-date">${stageDate}</span>` : ''}
-                        ${isCurrent ? '<span style="color:#38bdf8;font-size:0.8em;">← Atual</span>' : ''}
+                        ${isCurrent ? '<span style="color:#7C3AED;font-size:0.8em;">← Atual</span>' : ''}
                     </div>
                 `;
             }).join('');
@@ -1996,9 +2578,11 @@
             addAlert('📊 Sistema Online', 'Tesla monitorando 10 projetos ativamente');
             addAlert('⚠️ Documento Pendente', 'PROJ 100: Procuração pendente há 5 dias');
             addAlert('✅ Parecer Aprovado', 'PROJ 130: Homologação confirmada');
+            initAlertsScroll();
             startSimulation();
         });
     </script>
 </body>
 
+</html>
 </html>
